@@ -15,8 +15,11 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   var questionIndex = 0;
+  var totalScore = 0;
 
-  void answerQuestion() {
+  void answerQuestion(int score) {
+    totalScore += score;
+
     setState(() {
       questionIndex += 1;
     });
@@ -26,16 +29,31 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     const questions = [
       {
-        'questionText': 'What\'s your favourite color?',
-        'answers': ['Black', 'Red', 'Green', 'White']
+        'questionText': 'What\'s your favorite color?',
+        'answers': [
+          {'text': 'Black', 'score': 10},
+          {'text': 'Red', 'score': 5},
+          {'text': 'Green', 'score': 3},
+          {'text': 'White', 'score': 1},
+        ],
       },
       {
-        'questionText': 'What\'s your favourite animal?',
-        'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion']
+        'questionText': 'What\'s your favorite animal?',
+        'answers': [
+          {'text': 'Rabbit', 'score': 3},
+          {'text': 'Snake', 'score': 11},
+          {'text': 'Elephant', 'score': 5},
+          {'text': 'Lion', 'score': 9},
+        ],
       },
       {
-        'questionText': 'Who\'s your favourite instructor?',
-        'answers': ['Max', 'Max', 'Max', 'Max']
+        'questionText': 'Who\'s your favorite instructor?',
+        'answers': [
+          {'text': 'Max', 'score': 1},
+          {'text': 'Max', 'score': 1},
+          {'text': 'Max', 'score': 1},
+          {'text': 'Max', 'score': 1},
+        ],
       },
     ];
 
@@ -49,7 +67,7 @@ class MyAppState extends State<MyApp> {
                 questions: questions,
                 questionIndex: questionIndex,
                 answerQuestion: answerQuestion)
-            : const Result(),
+            : Result(resultScore: totalScore),
       ),
     );
   }
