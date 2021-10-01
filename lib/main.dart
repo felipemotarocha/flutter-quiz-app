@@ -25,6 +25,13 @@ class MyAppState extends State<MyApp> {
     });
   }
 
+  void resetQuiz() {
+    setState(() {
+      questionIndex = 0;
+      totalScore = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     const questions = [
@@ -67,7 +74,10 @@ class MyAppState extends State<MyApp> {
                 questions: questions,
                 questionIndex: questionIndex,
                 answerQuestion: answerQuestion)
-            : Result(resultScore: totalScore),
+            : Result(
+                resultScore: totalScore,
+                handleRestartQuizPress: resetQuiz,
+              ),
       ),
     );
   }
