@@ -1,9 +1,8 @@
 // ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
-import 'package:quiz_app/answer.dart';
 
-import 'question.dart';
+import 'package:quiz_app/quiz.dart';
+import 'package:quiz_app/result.dart';
 
 void main() => runApp(MyApp());
 
@@ -45,15 +44,12 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('My First App'),
         ),
-        body: Column(
-          children: [
-            Question(questions[questionIndex]['questionText'] as String),
-            ...(questions[questionIndex]['answers'] as List<String>)
-                .map((question) {
-              return Answer(answerQuestion, question);
-            }).toList()
-          ],
-        ),
+        body: questionIndex < questions.length
+            ? Quiz(
+                questions: questions,
+                questionIndex: questionIndex,
+                answerQuestion: answerQuestion)
+            : const Result(),
       ),
     );
   }
